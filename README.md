@@ -1,4 +1,4 @@
-#Asana Client Portal
+# Asana Client Portal
 
 A simple node project to create a client portal for your Asana projects
 
@@ -6,7 +6,7 @@ Grab your api key from [Asana's developer console](https://app.asana.com/-/devel
 
 Set your enviroment variable 'ASANA_KEY' to be this value.
 
-Inside the asanaController under the getAllTaskForProject function make sure you select the correct workspace that task will be pulled from.
+Inside the 'asanaController' under the 'getAllTaskForProject' function make sure you select the correct workspace that task will be pulled from.
 
 `var workspaceId = user.workspaces[1].id;`
 
