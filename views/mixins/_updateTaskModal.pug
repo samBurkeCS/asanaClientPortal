@@ -1,0 +1,26 @@
+mixin updateTaskModal(task)
+	.col-12
+		div(class="modal fade" id=`task${task.id}` tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+			.modal-dialog(role="document")
+				.loader
+				.modal-content
+					.modal-header
+						h5.modal-title#exampleModalLabel #{task.name}
+						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+							span(aria-hidden="true") &times;
+					.modal-body
+						.task-details
+							p #{task.notes}
+							if task.comments.length > 0
+								h5 Comments:
+								.comments
+									for comment in task.comments
+										p #{comment.text}
+										p.text-right - #{comment.created_at}
+						form
+							.form-group
+								label(for="comment" class="col-form-label") New comment:
+								textarea(class="form-control" id="comment" name="comment" rows="5") 
+					.modal-footer
+						button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+						button(type="button" class="btn btn-primary" onclick=`addComment(${task.id})`) Comment 

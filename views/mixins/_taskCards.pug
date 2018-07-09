@@ -1,0 +1,31 @@
+include _createTaskModal
+include _updateTaskModal
+mixin taskCards(tasks)
+	.row.task-container
+		for task in tasks
+			.col-sm-4
+				.col-sm-12.bg-light.task-card.p-3.mb-5.rounded(data-toggle="modal" data-target=`#task${task.id}`)
+					.row
+						.col-sm-12
+							h5.text-center.task-header #{task.name}
+					.row
+						.col-sm-12
+							p.task-card-date.text-right #{task.created_at}
+					.row
+						.col-sm-12
+							p.task-notes=`${task.notes.length > 160 ? task.notes.substring(0,157) + "...": task.notes}`
+				+updateTaskModal(task)
+		.col-sm-4
+			.col-sm-12.bg-light.task-card
+				.row
+					.col-sm-12
+						+createTaskModal(tasks[0].project)
+	script.
+		$('.task-card').on( "click", function() {
+			console.log(`${$(this).attr("data-target")}`)
+			var modal = $(this).attr("data-target")	
+			console.log(modal)
+			if(($(`${$(this).attr("data-target")}`).data('bs.modal') || {})._isShown){
+		   		$(modal).modal('toggle')
+			}
+		})

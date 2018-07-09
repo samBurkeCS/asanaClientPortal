@@ -1,0 +1,31 @@
+mixin createTaskModal(id)
+	.col-12.text-center
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTaskModal">Create Task</button>
+		<div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			.modal-dialog(role="document")
+				.modal-content
+					.modal-header
+						h5.modal-title#exampleModalLabel New Task
+						button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+							span(aria-hidden="true") &times;
+					.modal-body
+						form
+							.form-group
+								label(for="name" class="col-form-label") Task name:
+								input(type="text" class="form-control" id="name" name="name")
+							.form-group
+								label(for="notes" class="col-form-label") Task description:
+								<textarea class="form-control" id="notes" name="notes" rows="15"></textarea>	
+					.modal-footer
+						button(type="button" class="btn btn-secondary" data-dismiss="modal") Close
+						button(type="button" class="btn btn-primary" data-dismiss="modal" onclick=`createTask(${id})`) Create 
+						button(type="button" class="btn btn-success" onclick=`createTask(${id})`) Create and add another
+	script.
+		$('#createTaskModal').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget) // Button that triggered the modal
+			var recipient = button.data('whatever') // Extract info from data-* attributes
+			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+			var modal = $(this)
+			modal.find('.modal-title').text('Create Task')
+		})

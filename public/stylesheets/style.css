@@ -1,0 +1,63 @@
+body {
+  padding: 50px;
+  font-family: 'Montserrat', sans-serif;
+  background-color:#ee5a5a
+}
+
+a {
+  color: #00B7FF;
+}
+
+.task-card
+{
+	min-height: 90%;
+	transition: box-shadow 0.3s;
+	margin: 8px;
+	padding: 16px;
+	max-height: 200px;
+}
+
+.task-notes
+{
+	height: 148px;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+
+.task-card:hover {
+  -webkit-box-shadow: -11px 22px 50px -12px rgba(0,0,0,0.75);
+	-moz-box-shadow: -11px 22px 50px -12px rgba(0,0,0,0.75);
+	box-shadow: -11px 22px 50px -12px rgba(0,0,0,0.75);
+}
+
+.task-card-date
+{
+	font-size: 0.8rem
+
+}
+
+.comments
+{
+	max-height: 200px;
+    overflow-y: scroll;
+    font-size: 0.8rem
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: auto;
+  	position: absolute;
+  	top: 0; left: 0; bottom: 0; right: 0;
+    display: none;
+    z-index: 1001;   
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
