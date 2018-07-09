@@ -17,7 +17,7 @@ async function getTaskComments(client, id)
 		{	
 			if(value.type == "comment")
 			{
-				value.created_at = moment(value.created_at).format('MMMM Do')
+				value.created_at = moment(value.created_at).fromNow(); 
 				comments.push(value)
 			}
 		})
@@ -29,6 +29,7 @@ async function getTaskComments(client, id)
 	return comments
 };
 
+//This will get all tasks and the task comments for a given project
 async function getAllTaskForProject(projectName)
 {
 	let tasks;
@@ -40,7 +41,7 @@ async function getAllTaskForProject(projectName)
 		// The user's "default" workspace is the first one in the list, though
 		// any user can have multiple workspaces so you can't always assume this
 		// is the one you want to work with.
-		//res.send(user)
+
 		var workspaceId = user.workspaces[1].id;
 		 return client.projects.findAll({
 		 workspace: workspaceId,
@@ -53,6 +54,7 @@ async function getAllTaskForProject(projectName)
 			return value.name == projectName
 		});
 
+		//find all in project and return these fields
 		return client.tasks.findAll(
 		{
 			project: project.id,
@@ -60,15 +62,16 @@ async function getAllTaskForProject(projectName)
 		});
 	})
 	.then((response) => 
-	{
+	{	
+		//Make the date more readable
 		response.data.forEach(async (value)=>{
-			value.created_at = moment(value.created_at).format('MMMM Do')
+			value.created_at = moment(value.created_at).fromNow(); 
 			value.project = project.id
-			value.comments = await getTaskComments(client, value.id)
 		})
 		tasks = response.data
 	});
 
+	//does a parellel get of every tasks comments and sets each task comment to be the array returned
 	await Promise.all(tasks.map(async (value) => {
 		value.comments = await getTaskComments(client, value.id)
   	}));
@@ -76,6 +79,7 @@ async function getAllTaskForProject(projectName)
 	return tasks;
 }
 
+//creates a task based on data given
 exports.createTask = async (req,res) => 
 {
 	console.log(req.body)
@@ -84,7 +88,7 @@ exports.createTask = async (req,res) =>
 	await client.tasks.create(data)
 	.then((response)=>
 	{
-		response.created_at = moment(response.created_at).format('MMMM Do')
+		response.created_at = moment(response.created_at).fromNow(); 
 		res.send(response);
 	}).catch((error) =>
 	{
@@ -116,7 +120,7 @@ exports.addComment = async (req,res) =>
 	.then((response)=>
 	{
 		response.id = req.body.id;
-		response.created_at = moment(response.created_at).format('MMMM Do')
+		response.created_at = moment(response.created_at).fromNow(); 
 		res.send(response);
 	}).catch((error) =>
 	{

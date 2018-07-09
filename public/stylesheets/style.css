@@ -1,8 +1,24 @@
 body {
   padding: 50px;
   font-family: 'Montserrat', sans-serif;
-  background-color:#ee5a5a
+  background-color:#DF744A
 }
+
+nav a {
+  color: #FFFFFF;
+  font-weight: 200
+}
+
+nav a:hover {
+  color: #FFFFFF;
+  font-weight: 200
+}
+
+.navbar-brand
+{
+   padding-left: 45px;
+}
+nav {background-color: #233237;}
 
 a {
   color: #00B7FF;
@@ -38,8 +54,8 @@ a {
 
 .comments
 {
-	max-height: 200px;
-    overflow-y: scroll;
+	max-height: 400px;
+    overflow-y: auto;
     font-size: 0.8rem
 }
 
